@@ -123,6 +123,61 @@ router.get('/', optionalAuth, [
   }
 });
 
+// Get Problem of the Day
+router.get('/problem-of-the-day', authenticate, async (req, res) => {
+  try {
+    const randomProblem = await Problem.aggregate([
+      { $match: { isPublic: true, isApproved: true } },
+      { $sample: { size: 1 } }
+    ]);
+
+    if (!randomProblem || randomProblem.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No "Problem of the Day" found.'
+      });
+    }
+
+    const problem = await Problem.findById(randomProblem[0]._id)
+      .populate('author', 'username firstName lastName')
+      .select('-testCases -solution');
+
+    if (!problem) {
+      return res.status(404).json({
+        success: false,
+        message: 'Problem of the Day details not found.'
+      });
+    }
+
+    const problemSummary = problem.getSummary ? problem.getSummary() : problem.toObject();
+
+    // Check if user has solved this problem
+    const solvedSubmission = await Submission.findOne({
+      user: req.user._id,
+      problem: problem._id,
+      status: 'accepted'
+    });
+
+    problemSummary.isSolved = !!solvedSubmission;
+
+    // Check if user has bookmarked this problem
+    if (req.user.bookmarks.includes(problem._id)) {
+      problemSummary.isBookmarked = true;
+    }
+
+    res.json({
+      success: true,
+      data: problemSummary
+    });
+  } catch (error) {
+    console.error('Get Problem of the Day error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching Problem of the Day'
+    });
+  }
+});
+
 // Get problem by ID
 router.get('/:id', optionalAuth, async (req, res) => {
   try {

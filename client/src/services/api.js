@@ -60,6 +60,7 @@ export const authAPI = {
 // Problems API
 export const problemsAPI = {
   getProblems: (params) => api.get('/problems', { params }),
+  getProblemOfTheDay: () => api.get('/problems/problem-of-the-day'),
   getProblem: (id) => api.get(`/problems/${id}`),
   createProblem: (problemData) => api.post('/problems', problemData),
   updateProblem: (id, problemData) => api.put(`/problems/${id}`, problemData),
