@@ -38,8 +38,20 @@ api.interceptors.response.use(
 
 // Auth API
 export const authAPI = {
-  login: (credentials) => api.post('/auth/login', credentials),
-  register: (userData) => api.post('/auth/register', userData),
+  login: async (credentials) => {
+    const response = await api.post('/auth/login', credentials);
+    if (!response.data?.data?.token || !response.data?.data?.user) {
+      throw new Error('Invalid server response');
+    }
+    return response;
+  },
+  register: async (userData) => {
+    const response = await api.post('/auth/register', userData);
+    if (!response.data?.data?.token || !response.data?.data?.user) {
+      throw new Error('Invalid server response');
+    }
+    return response;
+  },
   getProfile: () => api.get('/auth/me'),
   updateProfile: (userData) => api.put('/auth/profile', userData),
   changePassword: (passwordData) => api.put('/auth/password', passwordData),

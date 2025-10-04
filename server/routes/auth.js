@@ -41,30 +41,51 @@ router.post('/register', [
     .withMessage('Role must be either student or instructor')
 ], async (req, res) => {
   try {
+    console.log('=== Registration Request Start ===');
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+    console.log('Request headers:', JSON.stringify(req.headers, null, 2));
+
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', JSON.stringify(errors.array(), null, 2));
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
         errors: errors.array()
       });
     }
+    console.log('Validation passed successfully');
 
     const { username, email, password, firstName, lastName, role = 'student' } = req.body;
+    console.log('Parsed registration data:', JSON.stringify({ 
+      username, 
+      email, 
+      firstName, 
+      lastName, 
+      role,
+      passwordLength: password ? password.length : 0
+    }, null, 2));
 
     // Check if user already exists
+    console.log('Checking for existing user...');
     const existingUser = await User.findOne({
       $or: [{ email }, { username }]
     });
 
     if (existingUser) {
+      console.log('User already exists:', JSON.stringify({
+        email: existingUser.email === email,
+        username: existingUser.username === username
+      }, null, 2));
       return res.status(400).json({
         success: false,
         message: 'User with this email or username already exists'
       });
     }
+    console.log('No existing user found');
 
+    console.log('Creating new user...');
     // Create new user
     const user = new User({
       username,
@@ -75,10 +96,24 @@ router.post('/register', [
       role
     });
 
-    await user.save();
+    console.log('Saving user to database...');
+    try {
+      await user.save();
+      console.log('User saved successfully:', JSON.stringify({
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        role: user.role
+      }, null, 2));
+    } catch (saveError) {
+      console.error('Error saving user:', saveError);
+      throw saveError;
+    }
 
     // Generate token
+    console.log('Generating token...');
     const token = generateToken(user._id);
+    console.log('Token generated successfully for user:', user._id);
 
     res.status(201).json({
       success: true,

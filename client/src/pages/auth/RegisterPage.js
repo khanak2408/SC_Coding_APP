@@ -12,8 +12,11 @@ const RegisterPage = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
   const registerMutation = useMutation(authAPI.register, {
-    onSuccess: (data) => {
-      const { token, user } = data.data;
+    onSuccess: (response) => {
+      const { token, user } = response.data.data;
+      if (!token || !user) {
+        throw new Error('Invalid response data');
+      }
       login(token, user);
       toast.success('Registration successful!');
       navigate('/dashboard');

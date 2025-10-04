@@ -15,8 +15,11 @@ const LoginPage = () => {
   const from = location.state?.from?.pathname || '/dashboard';
 
   const loginMutation = useMutation(authAPI.login, {
-    onSuccess: (data) => {
-      const { token, user } = data.data;
+    onSuccess: (response) => {
+      const { token, user } = response.data.data;
+      if (!token || !user) {
+        throw new Error('Invalid server response');
+      }
       login(token, user);
       toast.success('Login successful!');
       navigate(from, { replace: true });

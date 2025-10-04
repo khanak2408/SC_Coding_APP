@@ -39,8 +39,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token, userData) => {
     try {
-      if (!token || !userData) {
-        throw new Error('Invalid login data');
+      if (!token) {
+        throw new Error('Token is required for login');
+      }
+      if (!userData || typeof userData !== 'object') {
+        throw new Error('Invalid user data');
       }
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
