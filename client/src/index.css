@@ -2,175 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for the code editor */
-.code-block {
-  @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto;
-}
+@layer components {
+  /* Custom styles for the code editor */
+  .code-block {
+    @apply bg-gray-100 p-4 rounded-lg overflow-x-auto dark:bg-gray-800;
+  }
 
-.code-block pre {
-  @apply text-sm font-mono;
-}
+  .code-block pre {
+    @apply text-sm font-mono;
+  }
 
-/* Loading spinner styles */
-.loading-spinner {
-  @apply inline-block w-6 h-6 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
-}
+  /* Loading spinner styles */
+  .loading-spinner {
+    @apply inline-block w-6 h-6 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
+  }
 
-.loading-spinner-sm {
-  @apply inline-block w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
-}
+  .loading-spinner-sm {
+    @apply inline-block w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
+  }
 
-.loading-spinner-lg {
-  @apply inline-block w-8 h-8 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
-}
+  .loading-spinner-lg {
+    @apply inline-block w-8 h-8 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
+  }
 
-/* Badge styles */
-.badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-}
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
 
-.badge-green {
-  @apply bg-green-100 text-green-800;
-}
+  .badge-green {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
 
-.badge-yellow {
-  @apply bg-yellow-100 text-yellow-800;
-}
+  .badge-yellow {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
 
-.badge-red {
-  @apply bg-red-100 text-red-800;
-}
+  .badge-red {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
 
-.badge-blue {
-  @apply bg-blue-100 text-blue-800;
-}
+  .badge-blue {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+  }
 
-.badge-purple {
-  @apply bg-purple-100 text-purple-800;
-}
+  .badge-purple {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200;
+  }
 
-.badge-orange {
-  @apply bg-orange-100 text-orange-800;
-}
+  .badge-orange {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200;
+  }
 
-.badge-gray {
-  @apply bg-gray-100 text-gray-800;
-}
+  .badge-gray {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200;
+  }
 
-/* Difficulty badge styles */
-.difficulty-green {
-  @apply bg-green-100 text-green-800;
-}
+  /* Difficulty badge styles */
+  .difficulty-green {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
 
-.difficulty-yellow {
-  @apply bg-yellow-100 text-yellow-800;
-}
+  .difficulty-yellow {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
 
-.difficulty-red {
-  @apply bg-red-100 text-red-800;
-}
+  .difficulty-red {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
 
-/* Button styles */
-.btn {
-  @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
-}
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
 
-.btn-primary {
-  @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
-}
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
 
-.btn-secondary {
-  @apply btn bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
-}
+  .btn-secondary {
+    @apply btn bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
+  }
 
-.btn-ghost {
-  @apply btn bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-500;
-}
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-500 dark:text-gray-300 dark:hover:bg-gray-800;
+  }
 
-.btn-danger {
-  @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
-}
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
 
-/* Input styles */
-.input {
-  @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm;
-}
+  /* Input styles */
+  .input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400;
+  }
 
-/* Card styles */
-.card {
-  @apply bg-white overflow-hidden shadow rounded-lg;
-}
+  /* Card styles */
+  .card {
+    @apply bg-white overflow-hidden shadow rounded-lg dark:bg-gray-800 dark:text-white;
+  }
 
-.card-header {
-  @apply px-4 py-5 sm:px-6 border-b border-gray-200;
-}
+  .card-header {
+    @apply px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700;
+  }
 
-.card-body {
-  @apply px-4 py-5 sm:p-6;
-}
+  .card-body {
+    @apply px-4 py-5 sm:p-6;
+  }
 
-.card-footer {
-  @apply px-4 py-4 sm:px-6 bg-gray-50 border-t border-gray-200;
-}
+  .card-footer {
+    @apply px-4 py-4 sm:px-6 bg-gray-50 border-t border-gray-200 dark:bg-gray-700 dark:border-gray-700;
+  }
 
-/* Sidebar link styles */
-.sidebar-link {
-  @apply group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold;
-}
+  /* Sidebar link styles */
+  .sidebar-link {
+    @apply flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold;
+  }
 
-.sidebar-link-active {
-  @apply sidebar-link bg-gray-50 text-primary-600;
-}
+  .sidebar-link-active {
+    @apply bg-gray-50 text-primary-600 dark:bg-gray-800 dark:text-primary-400;
+  }
 
-.sidebar-link-inactive {
-  @apply sidebar-link text-gray-700 hover:text-primary-600 hover:bg-gray-50;
-}
-
-/* Dark mode styles */
-[data-theme="dark"] .code-block {
-  @apply bg-gray-800;
-}
-
-[data-theme="dark"] .badge-green {
-  @apply bg-green-900 text-green-200;
-}
-
-[data-theme="dark"] .badge-yellow {
-  @apply bg-yellow-900 text-yellow-200;
-}
-
-[data-theme="dark"] .badge-red {
-  @apply bg-red-900 text-red-200;
-}
-
-[data-theme="dark"] .badge-blue {
-  @apply bg-blue-900 text-blue-200;
-}
-
-[data-theme="dark"] .badge-purple {
-  @apply bg-purple-900 text-purple-200;
-}
-
-[data-theme="dark"] .badge-orange {
-  @apply bg-orange-900 text-orange-200;
-}
-
-[data-theme="dark"] .badge-gray {
-  @apply bg-gray-700 text-gray-200;
-}
-
-[data-theme="dark"] .card {
-  @apply bg-gray-800 text-white;
-}
-
-[data-theme="dark"] .card-header {
-  @apply border-gray-700;
-}
-
-[data-theme="dark"] .card-footer {
-  @apply bg-gray-700 border-gray-700;
-}
-
-[data-theme="dark"] .input {
-  @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400;
+  .sidebar-link-inactive {
+    @apply text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800;
+  }
 }
